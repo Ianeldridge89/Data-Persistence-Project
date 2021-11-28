@@ -12,18 +12,13 @@ public class MenuUIHandler : MonoBehaviour
 {
 
     public InputField playerNameInput;
-    public string playerName;
+    
 
     // Start is called before the first frame update
 
     public void NewNameSelected()
     {
-        playerName = playerNameInput.text;
-    }
-
-    public string GetPlayerName()
-    {
-        return playerName;
+        ScoreManager.Instance.playerName = playerNameInput.text;
     }
 
     public void StartNew()
@@ -39,6 +34,7 @@ public class MenuUIHandler : MonoBehaviour
 #else
         Application.Quit();
 #endif
+        ScoreManager.Instance.SaveScore();
     }
 
     void Start()
