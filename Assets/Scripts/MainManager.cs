@@ -97,6 +97,7 @@ public class MainManager : MonoBehaviour
             ScoreManager.Instance.bestScore = m_Points;
             ScoreManager.Instance.topPlayerName = ScoreManager.Instance.playerName;
             DisplayBestScoreText();
+            ScoreManager.Instance.SaveData();
         }
     }
 
