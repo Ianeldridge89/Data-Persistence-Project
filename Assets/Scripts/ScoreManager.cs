@@ -9,6 +9,7 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance;
     public string playerName;
+    public string topPlayerName;
     public int playerScore;
     public int bestScore;
 
@@ -21,39 +22,36 @@ public class ScoreManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
-        LoadScore();
+        LoadData();
     }
 
     [System.Serializable]
-    class SaveData
+    class HighScoreData
     {
-        public string playerName;
-        public int playerScore;
-        public int bestScore;
+        public int highScore;
+        public string highScorer;
     }
 
-    public void SaveScore()
+    public void SaveData()
     {
-        SaveData data = new SaveData();
-        data.playerName = playerName;
-        data.bestScore = bestScore;
+        HighScoreData data = new HighScoreData();
+        data.highScore = bestScore;
+        data.highScorer = topPlayerName;
 
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
     }
 
-    public void LoadScore()
+    public void LoadData()
     {
         string path = Application.persistentDataPath + "/savefile.json";
         if (File.Exists(path))
         {
             string json = File.ReadAllText(path);
-            SaveData data = JsonUtility.FromJson<SaveData>(json);
+            HighScoreData data = JsonUtility.FromJson<HighScoreData>(json);
 
-            playerName = data.playerName;
-            bestScore = data.bestScore;
-
+            bestScore = data.highScore;
+            topPlayerName = data.highScorer;
         }
     }
-
 }

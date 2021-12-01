@@ -34,7 +34,7 @@ public class MenuUIHandler : MonoBehaviour
 #else
         Application.Quit();
 #endif
-        ScoreManager.Instance.SaveScore();
+        ScoreManager.Instance.SaveData();
     }
 
     void Start()
